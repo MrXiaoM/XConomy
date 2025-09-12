@@ -346,7 +346,11 @@ public class CommandCore {
                 }
 
                 String com = commandName + " " + args[0] + " " + amount;
-                DataCon.changeplayerdata("PLAYER_COMMAND", sender.toPlayer().getUniqueId(), taxamount, false, com, null);
+                if (!DataCon.changeplayerdata("PLAYER_COMMAND", sender.toPlayer().getUniqueId(), taxamount, false, com, null)) {
+                    sendMessages(sender, PREFIX + translateColorCodes("pay_fail")
+                            .replace("%amount%", taxamountFormatted));
+                    return true;
+                }
                 sendMessages(sender, PREFIX + translateColorCodes("pay")
                         .replace("%player%", realname)
                         .replace("%amount%", amountFormatted));
@@ -551,7 +555,12 @@ public class CommandCore {
                                     return true;
                                 }
 
-                                DataCon.changeplayerdata("ADMIN_COMMAND", targetUUID, amount, false, com, reasonmessages);
+                                if (!DataCon.changeplayerdata("ADMIN_COMMAND", targetUUID, amount, false, com, reasonmessages)) {
+                                    sendMessages(sender, PREFIX + translateColorCodes("money_take_fail")
+                                            .replace("%player%", realname)
+                                            .replace("%amount%", amountFormatted));
+                                    return true;
+                                }
                                 sendMessages(sender, PREFIX + translateColorCodes("money_take")
                                         .replace("%player%", realname)
                                         .replace("%amount%", amountFormatted));

@@ -91,8 +91,11 @@ public class XConomyAPI {
                 }
             }
         }
-        DataCon.changeplayerdata("PLUGIN_API", u, amount, isadd, pluginname, null);
-        return 0;
+        if (DataCon.changeplayerdata("PLUGIN_API", u, amount, isadd, pluginname, null)) {
+            return 0;
+        } else {
+            return 2;
+        }
     }
 
     public int changeAccountBalance(String account, BigDecimal amount, Boolean isadd) {
@@ -112,8 +115,11 @@ public class XConomyAPI {
                 }
             }
         }
-        DataCon.changeaccountdata("PLUGIN_API", account, amount, isadd, pluginname);
-        return 0;
+        if (DataCon.changeaccountdata("PLUGIN_API", account, amount, isadd, pluginname)) {
+            return 0;
+        } else {
+            return 2;
+        }
     }
 
     public List<String> getbalancetop() {

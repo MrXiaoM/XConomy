@@ -126,8 +126,11 @@ public class Vault extends AbstractEconomy {
         }
 
         if (isNonPlayerAccount(name)) {
-            DataCon.changeaccountdata("PLUGIN", name, amountFormatted, true, null);
-            return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.SUCCESS, "");
+            if (DataCon.changeaccountdata("PLUGIN", name, amountFormatted, true, null)) {
+                return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.SUCCESS, "");
+            } else {
+                return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.FAILURE, "Money not enough!");
+            }
         }
 
         PlayerData pd = DataCon.getPlayerData(name);
@@ -135,8 +138,11 @@ public class Vault extends AbstractEconomy {
             return new EconomyResponse(0.0D, 0.0D, EconomyResponse.ResponseType.FAILURE, "No Account!");
         }
 
-        DataCon.changeplayerdata("PLUGIN", pd.getUniqueId(), amountFormatted, true, null, null);
-        return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.SUCCESS, "");
+        if (DataCon.changeplayerdata("PLUGIN", pd.getUniqueId(), amountFormatted, true, null, null)) {
+            return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.SUCCESS, "");
+        } else {
+            return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.FAILURE, "Money not enough!");
+        }
     }
 
     @Override
@@ -159,8 +165,11 @@ public class Vault extends AbstractEconomy {
             return new EconomyResponse(0.0D, bal, EconomyResponse.ResponseType.FAILURE, "Max balance!");
         }
 
-        DataCon.changeplayerdata("PLUGIN", pp.getUniqueId(), amountFormatted, true, null, null);
-        return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.SUCCESS, "");
+        if (DataCon.changeplayerdata("PLUGIN", pp.getUniqueId(), amountFormatted, true, null, null)) {
+            return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.SUCCESS, "");
+        } else {
+            return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.FAILURE, "Money not enough!");
+        }
     }
 
     @Override
@@ -310,8 +319,11 @@ public class Vault extends AbstractEconomy {
         }
 
         if (isNonPlayerAccount(name)) {
-            DataCon.changeaccountdata("PLUGIN", name, amountFormatted, false, null);
-            return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.SUCCESS, "");
+            if (DataCon.changeaccountdata("PLUGIN", name, amountFormatted, false, null)) {
+                return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.SUCCESS, "");
+            } else {
+                return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.FAILURE, "Money not enough!");
+            }
         }
 
         PlayerData pd = DataCon.getPlayerData(name);
@@ -319,8 +331,11 @@ public class Vault extends AbstractEconomy {
             return new EconomyResponse(0.0D, 0.0D, EconomyResponse.ResponseType.FAILURE, "No Account!");
         }
 
-        DataCon.changeplayerdata("PLUGIN", pd.getUniqueId(), amountFormatted, false, null, null);
-        return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.SUCCESS, "");
+        if (DataCon.changeplayerdata("PLUGIN", pd.getUniqueId(), amountFormatted, false, null, null)) {
+            return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.SUCCESS, "");
+        } else {
+            return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.FAILURE, "Money not enough!");
+        }
     }
 
     @Override
@@ -343,8 +358,11 @@ public class Vault extends AbstractEconomy {
             return new EconomyResponse(0.0D, bal, EconomyResponse.ResponseType.FAILURE, "Insufficient balance!");
         }
 
-        DataCon.changeplayerdata("PLUGIN", pp.getUniqueId(), amountFormatted, false, null, null);
-        return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.SUCCESS, "");
+        if (DataCon.changeplayerdata("PLUGIN", pp.getUniqueId(), amountFormatted, false, null, null)) {
+            return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.SUCCESS, "");
+        } else {
+            return new EconomyResponse(amount, bal, EconomyResponse.ResponseType.FAILURE, "Money not enough!");
+        }
     }
 
     @Override

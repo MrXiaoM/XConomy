@@ -92,10 +92,15 @@ public class XCUniqueAccount implements UniqueAccount {
                     currency, amount, contexts, ResultType.FAILED,
                     DummyObjectProvider.createFor(TransactionType.class, "SET"));
         }
-        DataCon.changeplayerdata("PLUGIN", uuid, amount, null, "SETBALANCE", null);
-        return new XCTransactionResult(this,
-                currency, BigDecimal.ZERO, contexts, ResultType.SUCCESS,
-                DummyObjectProvider.createFor(TransactionType.class, "SET"));
+        if (DataCon.changeplayerdata("PLUGIN", uuid, amount, null, "SETBALANCE", null)) {
+            return new XCTransactionResult(this,
+                    currency, BigDecimal.ZERO, contexts, ResultType.SUCCESS,
+                    DummyObjectProvider.createFor(TransactionType.class, "SET"));
+        } else {
+            return new XCTransactionResult(this,
+                    currency, amount, contexts, ResultType.FAILED,
+                    DummyObjectProvider.createFor(TransactionType.class, "SET"));
+        }
     }
 
     @Override
@@ -132,10 +137,13 @@ public class XCUniqueAccount implements UniqueAccount {
                     currency, amount, contexts, ResultType.FAILED, TransactionTypes.DEPOSIT);
         }
 
-        DataCon.changeplayerdata("PLUGIN", uuid, amountFormatted, true, null, null);
-        return new XCTransactionResult(this,
-                currency, amount, contexts, ResultType.SUCCESS, TransactionTypes.DEPOSIT);
-
+        if (DataCon.changeplayerdata("PLUGIN", uuid, amountFormatted, true, null, null)) {
+            return new XCTransactionResult(this,
+                    currency, amount, contexts, ResultType.SUCCESS, TransactionTypes.DEPOSIT);
+        } else {
+            return new XCTransactionResult(this,
+                    currency, amount, contexts, ResultType.FAILED, TransactionTypes.DEPOSIT);
+        }
     }
 
     @Override
@@ -153,9 +161,13 @@ public class XCUniqueAccount implements UniqueAccount {
                     currency, amount, contexts, ResultType.FAILED, TransactionTypes.WITHDRAW);
         }
 
-        DataCon.changeplayerdata("PLUGIN", uuid, amountFormatted, false, null, null);
-        return new XCTransactionResult(this,
-                currency, amount, contexts, ResultType.SUCCESS, TransactionTypes.WITHDRAW);
+        if (DataCon.changeplayerdata("PLUGIN", uuid, amountFormatted, false, null, null)) {
+            return new XCTransactionResult(this,
+                    currency, amount, contexts, ResultType.SUCCESS, TransactionTypes.WITHDRAW);
+        } else {
+            return new XCTransactionResult(this,
+                    currency, amount, contexts, ResultType.FAILED, TransactionTypes.WITHDRAW);
+        }
     }
 
     @Override
