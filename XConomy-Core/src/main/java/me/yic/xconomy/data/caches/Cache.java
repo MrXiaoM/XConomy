@@ -115,10 +115,17 @@ public class Cache {
 
     @SuppressWarnings("all")
     public static void removefromCache(final UUID uuid) {
-        if (pds.containsKey(uuid)) {
-            String name = pds.get(uuid).getName();
+        PlayerData pd = pds.remove(uuid);
+        if (pd != null) {
+            uuids.remove(pd.getName());
+        }
+    }
+
+
+    public static void removeFromCache(String name) {
+        UUID uuid = uuids.remove(name);
+        if (uuid != null) {
             pds.remove(uuid);
-            uuids.remove(name);
         }
     }
 

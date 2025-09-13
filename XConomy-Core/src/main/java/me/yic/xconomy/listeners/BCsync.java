@@ -43,11 +43,12 @@ public class BCsync implements Listener {
         if (!event.getTag().equalsIgnoreCase("xconomy:acb")) {
             return;
         }
+        Server senderServer = (Server) event.getSender();
+        //System.out.println("收到通信包 xconomy:acb 来自子服 " + senderServer.getInfo().getName());
 
         ByteArrayInputStream input = new ByteArrayInputStream(event.getData());
         try {
             ObjectInputStream ios = new ObjectInputStream(input);
-            Server senderServer = (Server) event.getSender();
 
             ByteArrayOutputStream output = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(output);
@@ -85,7 +86,7 @@ public class BCsync implements Listener {
             oos.writeObject(ob);
             oos.flush();
             for (ServerInfo s : ProxyServer.getInstance().getServers().values()) {
-                if (!s.getName().equals(senderServer.getInfo().getName()) && s.getPlayers().size() > 0) {
+                if (!s.getName().equals(senderServer.getInfo().getName()) && !s.getPlayers().isEmpty()) {
                     ProxyServer.getInstance().getScheduler().runAsync(XConomyBungee.getInstance(), () -> SendMessTaskB(s, output));
                 }
             }
@@ -97,5 +98,6 @@ public class BCsync implements Listener {
 
     public static void SendMessTaskB(ServerInfo s, ByteArrayOutputStream stream) {
         s.sendData("xconomy:aca", stream.toByteArray());
+        //System.out.println("发送通信包 xconomy:aca 给子服 " + s.getName());
     }
 }

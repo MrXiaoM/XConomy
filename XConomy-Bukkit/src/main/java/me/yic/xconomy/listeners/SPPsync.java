@@ -20,6 +20,9 @@ package me.yic.xconomy.listeners;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
+import me.yic.xconomy.data.DataCon;
+import me.yic.xconomy.data.caches.Cache;
+import me.yic.xconomy.data.caches.CacheNonPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.jetbrains.annotations.NotNull;
@@ -36,6 +39,11 @@ public class SPPsync implements PluginMessageListener {
         ByteArrayDataInput input = ByteStreams.newDataInput(message);
         String type = input.readUTF();
         String name = input.readUTF();
+
+        //System.out.println("收到通信包 xconomy:global，事件: " + type + "，玩家: " + name);
+
+        CacheNonPlayer.bal.remove(name);
+        Cache.removeFromCache(name);
 
         if (type.equalsIgnoreCase("Join")) {
             if (!TabList.PlayerList.contains(name)) {

@@ -68,5 +68,6 @@ public class BCPlayerEvent implements Listener {
 
     public static void SendMessTaskB(ServerInfo s, ByteArrayDataOutput stream) {
         s.sendData("xconomy:global", stream.toByteArray());
+        //System.out.println("发送通信包 xconomy:global 给子服 " + s.getName());
     }
 }
