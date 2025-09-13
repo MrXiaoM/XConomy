@@ -51,7 +51,7 @@ public class SPsync implements PluginMessageListener {
             }
 
             SyncData ob = (SyncData) ios.readObject();
-            if (!ob.getSign().equals(XConomy.Config.BUNGEECORD_SIGN)) {
+            if (ob.getSign().equals(XConomy.Config.BUNGEECORD_SIGN)) {
                 return;
             }
 
