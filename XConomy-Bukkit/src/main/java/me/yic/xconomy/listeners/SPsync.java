@@ -52,7 +52,7 @@ public class SPsync implements PluginMessageListener {
 
             SyncData ob = (SyncData) ios.readObject();
             //System.out.println("收到通信包 " + channel + " (" + ob.getSyncType() + ")，标志 " + ob.getSign());
-            if (ob.getSign().equals(XConomy.Config.BUNGEECORD_SIGN)) {
+            if (!ob.getSign().equals(XConomy.Config.BUNGEECORD_SIGN)) {
                 return;
             }
 
