@@ -82,7 +82,7 @@ public class CommandBalance extends CommandCore{
 
                 //Cache.refreshFromCache(player.getUniqueId());
 
-                BigDecimal a = DataCon.getPlayerData(player.getUniqueId()).getBalance();
+                BigDecimal a = DataCon.refreshPlayerDataWithCooldown(player.getUniqueId(), 3000L).getBalance();
                 sendMessages(sender, PREFIX + translateColorCodes("balance")
                         .replace("%balance%", DataFormat.shown((a))));
 

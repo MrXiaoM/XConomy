@@ -1,6 +1,7 @@
 package me.yic.xconomy.adapter.comp;
 
 
+import com.google.common.collect.Iterables;
 import me.yic.xconomy.XConomy;
 import me.yic.xconomy.XConomyLoad;
 import me.yic.xconomy.adapter.iPlugin;
@@ -81,7 +82,10 @@ public class CPlugin implements iPlugin {
 
     @Override
     public void sendPluginMessage(String channel, ByteArrayOutputStream stream){
-        Bukkit.getOnlinePlayers().iterator().next().sendPluginMessage(XConomy.getInstance(), channel, stream.toByteArray());
+        Player p = Iterables.getFirst(Bukkit.getOnlinePlayers(), null);
+        if (p != null) {
+            p.sendPluginMessage(XConomy.getInstance(), channel, stream.toByteArray());
+        }
     }
 
     @Override

@@ -37,9 +37,21 @@ import me.yic.xconomy.info.SyncChannalType;
 import me.yic.xconomy.utils.SendPluginMessage;
 
 import java.math.BigDecimal;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.UUID;
 
 public class DataCon {
+    private static final Map<UUID, Long> refreshCooldownMap = new TreeMap<>();
+
+    public static PlayerData refreshPlayerDataWithCooldown(UUID uuid, long cooldown) {
+        long now = System.currentTimeMillis();
+        if (now > refreshCooldownMap.getOrDefault(uuid, 0L)) {
+            refreshCooldownMap.put(uuid, now + cooldown);
+            return refreshPlayerData(uuid);
+        }
+        return getPlayerData(uuid);
+    }
 
     public static PlayerData refreshPlayerData(UUID uuid) {
         SQL.getPlayerData(uuid);
