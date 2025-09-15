@@ -30,7 +30,13 @@ public class RecordInfo {
     public RecordInfo(String type, String command, Object comment) {
         if (command == null) {
             this.type = type;
-            this.command = Thread.currentThread().getStackTrace()[getindex()].getClassName();
+            int index = XConomy.version.equals("Bukkit") ? 4 : 5;
+            StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+            String input = elements[index].getClassName();
+            if (input.startsWith("me.yic.xconomy.depend")) {
+                input = elements[index + 1].getClassName();
+            }
+            this.command = input;
             this.comment = "N/A";
         }else{
             if (comment == null) {
@@ -47,13 +53,6 @@ public class RecordInfo {
                 }
             }
         }
-    }
-
-    private int getindex() {
-        if (XConomy.version.equals("Bukkit")) {
-            return 4;
-        }
-        return 5;
     }
 
     public String getType() {
