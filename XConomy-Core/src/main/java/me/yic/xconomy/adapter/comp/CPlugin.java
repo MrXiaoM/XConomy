@@ -10,70 +10,73 @@ import java.util.UUID;
 
 @SuppressWarnings("unused")
 public class CPlugin implements iPlugin {
+    public CPlugin() {
+        throw new UnsupportedOperationException("stub");
+    }
     @Override
     public CPlayer getplayer(PlayerData pd) {
-        return null;
+        throw new UnsupportedOperationException("stub");
     }
 
     @Override
     public boolean getOnlinePlayersisEmpty() {
-        return false;
+        throw new UnsupportedOperationException("stub");
     }
 
     @Override
     public int getOnlinePlayerSize(){
-        return 0;
+        throw new UnsupportedOperationException("stub");
     }
 
     @Override
     public List<UUID> getOnlinePlayersUUIDs() {
-        return null;
+        throw new UnsupportedOperationException("stub");
     }
 
     @Override
     public void broadcastMessage(String message) {
-
+        throw new UnsupportedOperationException("stub");
     }
     @Override
     public UUID NameToUUID(String name) {
-        return null;
+        throw new UnsupportedOperationException("stub");
     }
     @Override
     public boolean isSync() {
-        return false;
+        throw new UnsupportedOperationException("stub");
     }
     @Override
     public void runTaskAsynchronously(Runnable ra) {
-
+        throw new UnsupportedOperationException("stub");
     }
 
     @Override
     public void runTaskLaterAsynchronously(Runnable ra, long time) {
-
+        throw new UnsupportedOperationException("stub");
     }
 
     @Override
     public void sendPluginMessage(String channel, ByteArrayOutputStream stream) {
-
+        throw new UnsupportedOperationException("stub");
     }
 
     @Override
     public void registerIncomingPluginChannel(String channel, String classname) {
-
+        throw new UnsupportedOperationException("stub");
     }
 
     @Override
     public void registerOutgoingPluginChannel(String channel) {
-
+        throw new UnsupportedOperationException("stub");
     }
 
     @Override
     public void unregisterIncomingPluginChannel(String channel, String classname) {
-
+        throw new UnsupportedOperationException("stub");
     }
 
     @Override
     public void unregisterOutgoingPluginChannel(String channel) {
-
+        throw new UnsupportedOperationException("stub");
     }
 }
